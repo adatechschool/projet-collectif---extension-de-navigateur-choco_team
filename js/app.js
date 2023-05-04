@@ -10,34 +10,31 @@
 // wind_degrees:80
 // wind_speed:7.72
 
-const city = 'Paris';
-const apiKey = 'jGqB7txlrkgkmzLpMO7gGw==6Q12joJpzRe2P8Xj';
-const url = `https://api.api-ninjas.com/v1/weather?city=${city}`;
-fetch(url, {
-  method: 'GET',
-  headers: {
-    'X-Api-Key': apiKey,
-    'Content-Type': 'application/json'
-  }
-})
-.then(response => {
-  if (response.ok) {
-    return response.json();
-  } else {
-    throw new Error('Error:', response.statusText);
-  }
-})
-.then(result => {
-  console.log(result);
-})
-.catch(error => {
-  console.error('Error:', error);
-});
- 
-function cityName(){
+// -------------------------------
+
+
+async function Search(){
     console.log("Coucou");
-    const cityN = document.querySelector(".city").value;
-        return cityN;
+    //const city = document.querySelector(".city").value;
+    //const apiKey = 'jGqB7txlrkgkmzLpMO7gGw==6Q12joJpzRe2P8Xj';
+    //const url = `https://api.api-ninjas.com/v1/weather?city=${city}`;
+
+    const data = await getCityApi()
+    console.log(data)
+    getHumidity(data)
 }
-cityName();
-console.log(cityName());
+
+async function getCityApi(){
+  const city = document.querySelector(".city").value;
+  console.log(city);
+  const apiKey = 'jGqB7txlrkgkmzLpMO7gGw==6Q12joJpzRe2P8Xj';
+  const response = await fetch (`https://api.api-ninjas.com/v1/weather?city=${city}`, { headers: {'X-Api-Key': apiKey}});
+
+  const dataJson = await response.json();
+
+  return dataJson;
+}
+
+function getHumidity (data) {
+  console.log(data.humidity);
+}
