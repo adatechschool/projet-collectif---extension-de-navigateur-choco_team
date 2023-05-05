@@ -20,30 +20,27 @@ async function search(){
     //const url = `https://api.api-ninjas.com/v1/weather?city=${city}`;
 
     const data = await getCityApi()
-    console.log(data)
-    getHumidity(data)
+    console.table(data)
+    humidity(data)
     image(data)
     temperature(data)
     min_max_temp(data)
     feel_like(data)
-
-
     sunrise(data)
+    sunset(data)
+    wind_speed(data)
+    windDegrees(data)
 }
 
 async function getCityApi(){
   const city = document.querySelector(".city").value;
-  console.log(city);
+  console.table(city);
   const apiKey = 'jGqB7txlrkgkmzLpMO7gGw==6Q12joJpzRe2P8Xj';
   const response = await fetch (`https://api.api-ninjas.com/v1/weather?city=${city}`, { headers: {'X-Api-Key': apiKey}});
 
   const dataJson = await response.json();
 
   return dataJson;
-}
-
-function getHumidity (data) {
-  console.log(data.humidity);
 }
 
 function image (data){
@@ -108,7 +105,7 @@ function feel_like(data){
 
 function humidity (data){
   let containerHumidity= document.querySelector(".value-humidity");
-  containerHumidity.innerHTML=`<span>`+data.humidity+` °C`+`</span>`;
+  containerHumidity.innerHTML=`<span>`+data.humidity+` %`+`</span>`;
  
 }
 
@@ -117,7 +114,45 @@ function humidity (data){
 // }
 
 function sunrise(data){
-  let containerSunrise= document.querySelector(".value-sunrise");
-  containerSunrise.innerHTML=`<span>`+ data.sunrise +`</span>`;
-}
+    let containerSunrise= document.querySelector(".value-sunrise");
+    const timestamp = data.sunrise;
+    const heure = timestampToHour(timestamp); 
+    containerSunrise.innerHTML=`<span>`+ heure +`</span>`;
+    
+    }
+    
+    function sunset(data){
+    let containerSunset= document.querySelector(".value-sunset");
+    const timestamp = data.sunset;
+    const heure = timestampToHour(timestamp);
+    containerSunset.innerHTML=`<span>`+ heure +`</span>`;
 
+    }
+    
+    function timestampToHour(timestamp) {
+      const date = new Date(timestamp * 1000); // Convertit les secondes en millisecondes
+      const hour = date.getHours().toString().padStart(2, '0');
+      const minute = date.getMinutes().toString().padStart(2, '0');
+      return `${hour}h${minute}`;
+    }
+
+    function wind_speed(data){
+        let containerWindSpeed= document.querySelector(".value-wind-speed");
+        const wind_speedInkmh = Math.trunc(data.wind_speed * 3.6);
+        containerWindSpeed.innerHTML=`<span>`+ wind_speedInkmh +` km/h`+`</span>`
+      }
+    
+    // function windDegrees(data){
+    //     let containerWinde= document.querySelector(".value-wind-degees");
+    //     containerWinde.innerHTML=`<span>`+data.wind_degrees+`°</span>`;    }
+    function windDegrees(data) {
+        let containerWindSpeed= document.querySelector(".value-wind-degrees");
+
+        const windDegrees = data.wind_degrees;
+        const compassDirections = ['Nord', 'Nord-Est', 'Est', 'Sud-Est', 'Sud', 'Sud-Ouest', 'Ouest', 'Norsd-Ouest'];
+        const index = Math.round(windDegrees / 45) % 8;
+        const compassDirection = compassDirections[index];
+
+        containerWindSpeed.innerHTML=`<span>`+ compassDirection +`</span>`
+
+      }
