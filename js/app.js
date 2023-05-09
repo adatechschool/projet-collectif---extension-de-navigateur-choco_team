@@ -12,6 +12,7 @@
 
 // -------------------------------
 
+document.querySelector(".button").addEventListener("click", search)
 
 async function search(){
     console.log("Coucou");
@@ -29,7 +30,7 @@ async function search(){
     sunrise(data)
     sunset(data)
     wind_speed(data)
-    windDegrees(data)
+    wind_degrees(data)
 }
 
 async function getCityApi(){
@@ -52,7 +53,7 @@ function image (data){
     //soleil
     // image.innerHTML=`<img src="image/soleil-64px.png">`
     // containerImage.appendChild(image);
-    containerImage.innerHTML=`<img src="image/soleil-64px.png">`
+    containerImage.innerHTML=`<img src="image/soleil-128px.png">`
     }
   if(data.humidity >= 25 && data.humidity <= 60 && data.cloud_pct >= 30) {
     //petite pluie
@@ -61,22 +62,22 @@ function image (data){
   }
   if(data.humidity > 60 && data.cloud_pct > 30){
         //grande pluie
-        containerImage.innerHTML=`<img src="image/pluie-64px.png">`
+        containerImage.innerHTML=`<img src="image/pluie-128px.png">`
         
   }
   if(data.cloud_pct > 30 && data.cloud_pct < 60){
     // nuageux
-    containerImage.innerHTML=`<img src="image/l-nuage-64px.png">`
+    containerImage.innerHTML=`<img src="image/l-nuage-128px.png">`
    
   }
   if(data.cloud_pct >= 60){
     //très nuageux
-    containerImage.innerHTML=`<img src="image/nuageux-64px.png">`
+    containerImage.innerHTML=`<img src="image/nuageux-128px.png">`
     
   }
   if( data.cloud_pct > 10 && data.humidity < 90 && data.temp < 4){
     //neige
-    containerImage.innerHTML=`<img src="image/Neige-64px.png">`
+    containerImage.innerHTML=`<img src="image/Neige-128px.png">`
     
  }
 
@@ -89,23 +90,23 @@ containerTemperature.innerHTML=`<span>`+data.temp+` °C`+`</span>`
 }
 
 function min_max_temp(data){
-  let containerMinTemp= document.querySelector(".value-min-temp");
-  let containerMaxTemp= document.querySelector(".value-max-temp");
-  containerMinTemp.innerHTML= `<span>`+data.min_temp+` °C`+`</span>`;
-  containerMaxTemp.innerHTML= `<span>`+data.max_temp+` °C`+`</span>`;
+  let containerMinTemp= document.querySelector(".min-temp");
+  let containerMaxTemp= document.querySelector(".max-temp");
+  containerMinTemp.innerHTML= `<span>`+ `Min temperature : ` + data.min_temp+` °C`+`</span>`;
+  containerMaxTemp.innerHTML= `<span>`+  `Max temperature : ` +data.max_temp+` °C`+`</span>`;
 
 }
 
 function feel_like(data){
-  let containerFeelLike= document.querySelector(".value-feel-like");
-  containerFeelLike.innerHTML=`<span>`+data.feels_like+` °C`+`</span>`;
+  let containerFeelLike= document.querySelector(".feel-like");
+  containerFeelLike.innerHTML=`<span>`+  `Feel-Like : ` +data.feels_like+` °C`+`</span>`;
   //des images à afficher 
 
 }
 
 function humidity (data){
-  let containerHumidity= document.querySelector(".value-humidity");
-  containerHumidity.innerHTML=`<span>`+data.humidity+` %`+`</span>`;
+  let containerHumidity= document.querySelector(".humidity");
+  containerHumidity.innerHTML=`<span>`+ `Humidity : ` +data.humidity+` %`+`</span>`;
  
 }
 
@@ -114,18 +115,18 @@ function humidity (data){
 // }
 
 function sunrise(data){
-    let containerSunrise= document.querySelector(".value-sunrise");
+    let containerSunrise= document.querySelector(".sunrise");
     const timestamp = data.sunrise;
     const heure = timestampToHour(timestamp); 
-    containerSunrise.innerHTML=`<span>`+ heure +`</span>`;
+    containerSunrise.innerHTML=`<span>`+ `Sunrise ` + heure +`</span>`;
     
     }
     
     function sunset(data){
-    let containerSunset= document.querySelector(".value-sunset");
+    let containerSunset= document.querySelector(".sunset");
     const timestamp = data.sunset;
     const heure = timestampToHour(timestamp);
-    containerSunset.innerHTML=`<span>`+ heure +`</span>`;
+    containerSunset.innerHTML=`<span>`+  `Sunset : ` + heure +`</span>`;
 
     }
     
@@ -137,22 +138,14 @@ function sunrise(data){
     }
 
     function wind_speed(data){
-        let containerWindSpeed= document.querySelector(".value-wind-speed");
+        let containerWindSpeed= document.querySelector(".wind-speed");
         const wind_speedInkmh = Math.trunc(data.wind_speed * 3.6);
-        containerWindSpeed.innerHTML=`<span>`+ wind_speedInkmh +` km/h`+`</span>`
+        containerWindSpeed.innerHTML=`<span>`+ `Wind speed : ` + wind_speedInkmh +` km/h`+ `🍃 `+`</span>`
       }
-    
-    // function windDegrees(data){
-    //     let containerWinde= document.querySelector(".value-wind-degees");
-    //     containerWinde.innerHTML=`<span>`+data.wind_degrees+`°</span>`;    }
-    function windDegrees(data) {
-        let containerWindSpeed= document.querySelector(".value-wind-degrees");
+  
+      function wind_degrees(data){
+        const arrowSvg = document.querySelector('.arrow-right');
+        const degree = data.wind_degrees + 90;
 
-        const windDegrees = data.wind_degrees;
-        const compassDirections = ['Nord', 'Nord-Est', 'Est', 'Sud-Est', 'Sud', 'Sud-Ouest', 'Ouest', 'Norsd-Ouest'];
-        const index = Math.round(windDegrees / 45) % 8;
-        const compassDirection = compassDirections[index];
-
-        containerWindSpeed.innerHTML=`<span>`+ compassDirection +`</span>`
-
+        arrowSvg.setAttribute('transform', 'rotate(' + degree + ')');
       }
