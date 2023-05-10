@@ -5,7 +5,7 @@ body{
 }
 
 .bg{
-  height:420px;
+  height:480px;
   width: 750px;
   /* background-color:#343d4b; */
   background: linear-gradient(135deg,  #222831 , #212f45 );
@@ -181,5 +181,10 @@ body{
   text-transform: capitalize;
 }
 
-
+.heure{
+  display: grid;
+  grid-template-areas: "a b";
+  font-size: large;
+  color: white;
+ }
 

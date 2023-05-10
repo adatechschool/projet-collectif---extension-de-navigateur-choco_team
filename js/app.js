@@ -153,3 +153,12 @@ function sunrise(data){
 
         arrowSvg.setAttribute('transform', 'rotate(' + degree + ')');
       }
+      setInterval(Time, 0);
+
+      function Time() {
+        const d = new Date()
+        document.getElementById("time").innerHTML = d.toLocaleTimeString();
+        const date = new Date();
+        document.getElementById("date").innerHTML = date.toDateString();
+       
+      }
