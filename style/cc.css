@@ -1,0 +1,192 @@
+
+/* --------------------------------------------- */
+*{
+    margin:0;
+    padding:0;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+
+   }
+
+   body{
+    background-color: #222;
+   }
+
+   .box{
+    width: 90%;
+    max-width: 470px;
+    background: linear-gradient(135deg, #00ffeabd,  #8379be);
+    color: #fff;
+    margin: 10px auto 0;
+    border-radius: 20px;
+    padding: 40px 35px;
+    text-align: center;
+   }
+
+   .search{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   }
+
+    .city{
+        border:0;
+        outline:0;
+        background: #ebfffc;
+        color: #555;
+        padding: 10px 25px;
+        height: 60px;
+        border-radius: 30px;
+        flex: 1;
+        margin-right: 16px;
+        font-size: 18px;
+       }
+
+       .button{
+        border:0;
+        outline:0;
+        background: #ebfffc;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+       }
+       .button:link,
+    .button:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 15px 40px;
+        display: inline-block;
+        border-radius: 100px;
+        transition: all .2s;
+        position: absolute;
+    }
+    
+    .button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .button:active {
+        transform: translateY(-1px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .button-white {
+        background-color: #fff;
+        color: #777;
+    }
+    
+    .button::after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 100px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: all .4s;
+    }
+    
+    .button-white::after {
+        background-color: #fff;
+    }
+    
+    .button:hover::after {
+        transform: scaleX(1.4) scaleY(1.6);
+        opacity: 0;
+    }
+    
+    .button-animated {
+        animation: moveInBottom 5s ease-out;
+        animation-fill-mode: backwards;
+    }
+    
+    @keyframes moveInBottom {
+        0% {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    
+        100% {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+    }
+    .box-1 {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .images-box-1 img {
+      margin-top: 20px;
+    }
+
+    .temperature {
+      font-size: 80px;
+      font-weight: bold;
+      color: #ebfffc;
+      margin-top: 10px;
+    }
+
+    .box-2 {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: 30px;
+      grid-row-gap: 20px;
+      text-align: left;
+      font-size: 20px;
+    }
+
+    .min-temp,
+    .max-temp,
+    .feel-like,
+    .humidity,
+    .wind-speed,
+    .wind-degrees,
+    .sunrise,
+    .sunset {
+      font-weight: bold;
+      margin-bottom: 5px;
+      text-transform: capitalize;
+    }
+
+    .value-min-temp,
+    .value-max-temp,
+    .value-feel-like,
+    .value-humidity,
+    .value-wind-speed,
+    .value-wind-degrees,
+    .value-sunrise,
+    .value-sunset {
+      margin-top: 0px;
+      margin-bottom: 10px;
+    }
+
+    .wind-arrow {
+        position: relative;
+        height: 0px;
+        width: 0px;
+        border: 6px solid;
+        border-color: #fff #fff transparent transparent;
+        transform: rotate(var(--deg, 0deg));
+    }
+    
+    .wind-arrow:before {
+        content: '';
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        display: block;
+        height: 6px;
+        width: 9px;
+        background-color: #fff;
+        transform: rotate(-45deg) translate(1px, 1px);
+    }
+  

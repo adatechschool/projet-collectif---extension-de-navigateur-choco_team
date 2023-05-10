@@ -12,6 +12,10 @@
 
 // -------------------------------
 
+
+
+
+// --------------------------------------
 document.querySelector(".button").addEventListener("click", search)
 
 async function search(){
@@ -140,7 +144,7 @@ function sunrise(data){
     function wind_speed(data){
         let containerWindSpeed= document.querySelector(".wind-speed");
         const wind_speedInkmh = Math.trunc(data.wind_speed * 3.6);
-        containerWindSpeed.innerHTML=`<span>`+ `Wind speed : ` + wind_speedInkmh +` km/h`+ `🍃 `+`</span>`
+        containerWindSpeed.innerHTML=`<span>`+ `Wind speed : ` + wind_speedInkmh +` km/h` + `</span>`
       }
   
       function wind_degrees(data){

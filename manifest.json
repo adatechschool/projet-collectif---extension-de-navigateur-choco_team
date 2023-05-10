@@ -3,9 +3,10 @@
     "name": "Weather Extension",
     "version": "1.0",
     "description": "This is a weather extension.",
-    "action":{
+    "permissions": ["activeTab"],
+        "action":{
         "default_popup": "index.html",
-            "default_icon": {
+        "default_icon": {
             "16":"image/icon-16.png",
             "32":"image/icon-32.png",
             "48":"image/icon-48.png",
